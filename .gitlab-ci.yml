@@ -1,14 +1,14 @@
-image: node:latest
-
-stages:
-- staging
-
-staging:
-  type: deploy
-  stage: staging
-  image: ruby:latest
-  script:
-  - apt-get update -qy
-  - apt-get install -y ruby-dev
-  - gem install dpl
-  - dpl --provider=heroku --app=makememove-dev --api-key=$HEROKU_API_KEY
+#image: node:latest
+#
+#stages:
+#- staging
+#
+#staging:
+#  type: deploy
+#  stage: staging
+#  image: ruby:latest
+#  script:
+#  - apt-get update -qy
+#  - apt-get install -y ruby-dev
+#  - gem install dpl
+#  - dpl --provider=heroku --app=makememove-dev --api-key=$HEROKU_API_KEY
