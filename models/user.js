@@ -14,7 +14,8 @@ const user = db.define('user', {
     userName: sequelize.STRING,
     email: sequelize.STRING,
     birthday: sequelize.DATE,
-    popularity: sequelize.DATE
+    popularity: sequelize.DATE,
+    password: sequelize.STRING
 });
 
 // user.hasOne(event, { foreignKey: 'reatorId'});
