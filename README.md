@@ -2,6 +2,7 @@
 
 This is the backend for makememove.
 
+# ENDPOINTS
 
 ## USERS
 
