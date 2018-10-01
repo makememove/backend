@@ -8,6 +8,8 @@ const app = require('../app');
 const debug = require('debug')('makememove-backend:server');
 const http = require('http');
 
+const models = require('../models');
+
 /**
  * Get port from environment and store in Express.
  */
@@ -25,9 +27,28 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+(async () => {
+    try {
+        await models.sequelize.authenticate();
+        await models.user.sync();
+        await models.sport.sync();
+        await models.category.sync();
+        await models.event.sync();
+        await models.team.sync();
+        await models.membership.sync();
+        await models.attendance.sync();
+        await models.userSkillPoint.sync();
+        await models.teamSkillPoint.sync();
+        await models.ranking.sync();
+        console.log('DB authenticated');
+        server.listen(port);
+        console.log(`Server listening on port: ${port}`);
+        server.on('error', onError);
+        server.on('listening', onListening);
+    } catch (err) {
+        console.log(err);
+    }
+})();
 
 /**
  * Normalize a port into a number, string, or false.
