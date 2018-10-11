@@ -1,4 +1,10 @@
 module.exports = objectRepository => async (req, res, next) => {
-    res.locals.sports = await objectRepository.models.sport.findAll();
+    try {
+        res.locals.sports = await objectRepository.models.sport.findAll();
+    } catch (err) {
+        console.log(err);
+        return next(err);
+    }
+
     return next();
 };

@@ -4,7 +4,7 @@ const team = require('./team');
 
 const attendance = db.define('attendance');
 
-team.belongsToMany(event, { through: attendance });
-event.belongsToMany(team, { through: attendance });
+team.belongsToMany(event, { through: attendance, as: 'attendances' });
+event.belongsToMany(team, { through: attendance, as: 'attendances' });
 
 module.exports = attendance;

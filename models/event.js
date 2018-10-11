@@ -15,7 +15,7 @@ const event = db.define('event', {
     highestSkillPoint: sequelize.INTEGER
 });
 
-event.belongsTo(user, { foreignKey: 'creatorId' });
+event.belongsTo(user, { foreignKey: 'creatorId', as: 'creator' });
 event.belongsTo(category);
 event.belongsTo(sport);
 

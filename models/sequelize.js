@@ -8,7 +8,7 @@ const sequelize = new Sequelize(config.db.database, config.db.username, config.d
     host: config.db.host,
     dialect: 'mysql',
     operatorsAliases: false,
-
+    logging: config.db.shouldLog,
     pool: {
         max: 5,
         min: 0,
