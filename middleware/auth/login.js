@@ -8,18 +8,32 @@ module.exports = objectRepository => async (req, res, next) => {
             return next(new Error('you must provide userName, email and password'));
         }
 
-        const nameIsEmail = !!email;
-        const query = { password };
+        let user = null;
+        user = await objectRepository.models.user.findOne({
+            where: {
+                userName,
+                password
+            }
+        });
 
-        if (nameIsEmail) {
-            query.email = email;
-        } else {
-            query.userName = userName;
+        if (user) {
+            res.locals.user = user;
+            return next();
         }
 
-        res.locals.user = await objectRepository.models.user.findOne({
-            where: query
+        user = await objectRepository.models.user.findOne({
+            where: {
+                email,
+                password
+            }
         });
+
+        if (!user) {
+            return next(new Error('no such user'));
+        }
+
+        res.locals.user = user;
+        return next();
     } catch (err) {
         console.log(err);
         return next(err);
