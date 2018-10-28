@@ -8,8 +8,7 @@ module.exports = objectRepository => async (req, res, next) => {
             return next(new Error('you must provide userName, email and password'));
         }
 
-        let user = null;
-        user = await objectRepository.models.user.findOne({
+        let user = await objectRepository.models.user.findOne({
             where: {
                 userName,
                 password
@@ -38,6 +37,4 @@ module.exports = objectRepository => async (req, res, next) => {
         console.log(err);
         return next(err);
     }
-
-    return next();
 };

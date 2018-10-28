@@ -40,6 +40,7 @@ const server = http.createServer(app);
         await models.userSkillPoint.sync();
         await models.teamSkillPoint.sync();
         await models.ranking.sync();
+        await models.userSport.sync();
         console.log('DB authenticated');
         server.listen(port);
         console.log(`Server listening on port: ${port}`);

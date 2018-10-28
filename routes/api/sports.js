@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const { checkAccess } = require('../../middleware/auth');
-const { getSports } = require('../../middleware/sports');
+const { getSports, getSportsForUser, followSport } = require('../../middleware/sports');
 
 const models = require('../../models');
 
@@ -17,6 +17,8 @@ const objectRepository = {
 
 router.use(checkAccess(objectRepository));
 
-router.get('/', getSports(objectRepository), json());
+router.get('/all', getSports(objectRepository), json());
+router.get('/', getSportsForUser(objectRepository), json());
+router.post('/follow/:sportId', followSport(objectRepository), json());
 
 module.exports = router;
