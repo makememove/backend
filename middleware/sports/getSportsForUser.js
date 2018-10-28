@@ -13,7 +13,7 @@ module.exports = objectRepository => async (req, res, next) => {
         });
 
         if(userSports.length === 0) {
-            res.local.sports = [];
+            res.locals.sports = [];
             return next();
         }
 
