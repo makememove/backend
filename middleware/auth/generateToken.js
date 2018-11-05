@@ -27,8 +27,10 @@ module.exports = () => async (req, res, next) => {
 
         const token = await encode(user.id);
 
-        delete res.locals.user;
+        res.locals.isAdmin = res.locals.user.type === 1;
         res.locals.token = token;
+
+        delete res.locals.user;
     } catch (err) {
         console.log(err);
         return next(err);
