@@ -9,6 +9,6 @@ const userSkillPoint = db.define('userSkillPoint', {
 });
 
 sport.belongsToMany(user, { through: userSkillPoint });
-user.belongsToMany(sport, { through: userSkillPoint });
+user.belongsToMany(sport, { through: userSkillPoint, as: 'following' });
 
 module.exports = userSkillPoint;

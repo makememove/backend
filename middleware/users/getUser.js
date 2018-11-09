@@ -5,7 +5,18 @@ module.exports = objectRepository => async (req, res, next) => {
             where: {
                 id: userId
             },
-            attributes: { exclude: ['password'] }
+            attributes: { exclude: ['password'] },
+            include: [
+                {
+                    model: objectRepository.models.sport,
+                    attributes: ['id', 'name'],
+                    through: {
+                        model: objectRepository.models.userSkillPoint,
+                        attributes: ['skillPoint']
+                    },
+                    as: 'following'
+                }
+            ]
         });
     } catch (err) {
         console.log(err);

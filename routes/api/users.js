@@ -19,5 +19,6 @@ router.use(checkAccess(objectRepository));
 
 router.get('/', getUsers(objectRepository), json());
 router.get('/me', getUser(objectRepository), json());
+router.get('/:userId', getUser(objectRepository), json());
 
 module.exports = router;

@@ -21,6 +21,12 @@ module.exports = objectRepository => async (req, res, next) => {
             sportId
         });
 
+        await objectRepository.models.userSkillPoint.create({
+            skillPoint: 0,
+            sportId,
+            userId: req.user.id
+        });
+
         res.locals.status = 'ok';
     } catch (err) {
         console.log(err);
