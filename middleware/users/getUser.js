@@ -1,7 +1,7 @@
 module.exports = objectRepository => async (req, res, next) => {
     try {
         const userId = req.params.userId || req.user.id;
-        res.locals.user = await objectRepository.models.user.findOne({
+        let user = await objectRepository.models.user.findOne({
             where: {
                 id: userId
             },
@@ -18,6 +18,15 @@ module.exports = objectRepository => async (req, res, next) => {
                 }
             ]
         });
+        if (!user) {
+            return next(new Error('not found'));
+        }
+
+        user = JSON.parse(JSON.stringify(user));
+
+
+
+        res.locals.user = user;
     } catch (err) {
         console.log(err);
         return next(err);
