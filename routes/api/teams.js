@@ -3,7 +3,14 @@ const express = require('express');
 const router = express.Router();
 
 const { checkAccess } = require('../../middleware/auth/');
-const { getTeams, getTeam, createTeam, joinTeam, leaveTeam } = require('../../middleware/teams/');
+const {
+    getTeams,
+    getTeam,
+    createTeam,
+    joinTeam,
+    leaveTeam,
+    deleteTeam
+} = require('../../middleware/teams/');
 
 const models = require('../../models/');
 
@@ -22,5 +29,6 @@ router.get('/:teamId', getTeam(objectRepository), json());
 router.post('/create', createTeam(objectRepository), json());
 router.post('/join/:teamId', joinTeam(objectRepository), json());
 router.post('/leave/:teamId', leaveTeam(objectRepository), json());
+router.post('/delete/:teamId', getTeam(objectRepository), deleteTeam(objectRepository), json());
 
 module.exports = router;
