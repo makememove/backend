@@ -3,7 +3,13 @@ const express = require('express');
 const router = express.Router();
 
 const { checkAccess } = require('../../middleware/auth/');
-const { getEvents, createEvent, editEvent, getEvent } = require('../../middleware/events/');
+const {
+    getEvents,
+    createEvent,
+    editEvent,
+    getEvent,
+    deleteEvent
+} = require('../../middleware/events/');
 
 const models = require('../../models/');
 
@@ -21,5 +27,6 @@ router.get('/', getEvents(objectRepository), json());
 router.get('/:eventId', getEvent(objectRepository), json());
 router.post('/create', createEvent(objectRepository), json());
 router.post('/edit/:eventId', getEvent(objectRepository), editEvent(objectRepository), json());
+router.post('/delete/:eventId', getEvent(objectRepository), deleteEvent(objectRepository), json());
 
 module.exports = router;
