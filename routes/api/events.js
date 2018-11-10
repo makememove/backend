@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const { checkAccess } = require('../../middleware/auth/');
-const { getEvents } = require('../../middleware/events/');
+const { getEvents, createEvent } = require('../../middleware/events/');
 
 const models = require('../../models/');
 
@@ -18,5 +18,6 @@ const objectRepository = {
 router.use(checkAccess(objectRepository));
 
 router.get('/', getEvents(objectRepository), json());
+router.post('/create', createEvent(objectRepository), json());
 
 module.exports = router;
