@@ -4,9 +4,9 @@ module.exports = objectRepository => async (req, res, next) => {
             where: {
                 id: { [objectRepository.models.sequelize.Op.ne]: req.user.id }
             },
-            attributes: ['id', 'lastName', 'firstName', 'picture']
+            attributes: ['id', 'lastName', 'firstName', 'picture', 'userName']
         });
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         return next(err);
     }
