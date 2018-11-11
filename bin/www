@@ -33,7 +33,7 @@ const server = http.createServer(app);
         await models.user.sync();
         await models.sport.sync();
         await models.category.sync();
-        await models.event.sync();
+        await models.event.sync({alter: true});
         await models.team.sync({alter: true});
         await models.membership.sync();
         await models.userSkillPoint.sync();

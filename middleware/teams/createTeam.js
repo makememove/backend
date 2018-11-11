@@ -5,9 +5,20 @@ module.exports = objectRepository => async (req, res, next) => {
             return next('name and capacity and eventId needed');
         }
 
-        const event = await objectRepository.models.event.findOne({ where: { id: eventId } });
+        const event = await objectRepository.models.event.findOne({
+            where: { id: eventId },
+            include: [
+                {
+                    model: objectRepository.models.team
+                }
+            ]
+        });
         if (!event) {
             return next(new Error('no such event!'));
+        }
+
+        if (event.teams.length + 1 > event.maxAttending) {
+            return next(new Error('event is full'));
         }
 
         await objectRepository.models.team.create({

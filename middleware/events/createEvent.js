@@ -10,7 +10,8 @@ module.exports = objectRepository => async (req, res, next) => {
             lowestSkillPoint,
             highestSkillPoint,
             categoryId,
-            sportId
+            sportId,
+            maxAttending
         } = req.body;
 
         if (!title) {
@@ -37,6 +38,10 @@ module.exports = objectRepository => async (req, res, next) => {
             return next(new Error('no such sport!'));
         }
 
+        if (typeof maxAttending === 'undefined') {
+            return next(new Error('maxAttending required'));
+        }
+
         await objectRepository.models.event.create({
             date: date || new Date(),
             public: isPublic ? 1 : 0,
@@ -48,7 +53,8 @@ module.exports = objectRepository => async (req, res, next) => {
             highestSkillPoint: highestSkillPoint || 10000,
             creatorId: req.user.id,
             categoryId,
-            sportId
+            sportId,
+            maxAttending
         });
 
         res.locals.status = 'ok';
