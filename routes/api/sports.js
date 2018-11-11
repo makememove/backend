@@ -7,7 +7,8 @@ const {
     getSports,
     getSportsForUser,
     followSport,
-    unfollowSport
+    unfollowSport,
+    getRankList
 } = require('../../middleware/sports');
 
 const models = require('../../models');
@@ -26,5 +27,6 @@ router.get('/all', getSports(objectRepository), json());
 router.get('/', getSportsForUser(objectRepository), json());
 router.post('/follow/:sportId', followSport(objectRepository), json());
 router.post('/unfollow/:sportId', unfollowSport(objectRepository), json());
+router.get('/ranklist/:sportId', getRankList(objectRepository), json());
 
 module.exports = router;
