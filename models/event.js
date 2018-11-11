@@ -3,6 +3,7 @@ const db = require('./sequelize');
 const user = require('./user');
 const category = require('./category');
 const sport = require('./sport');
+const team = require('./team');
 
 const event = db.define('event', {
     date: sequelize.DATE,
@@ -18,5 +19,6 @@ const event = db.define('event', {
 event.belongsTo(user, { foreignKey: 'creatorId', as: 'creator' });
 event.belongsTo(category);
 event.belongsTo(sport);
+event.hasMany(team);
 
 module.exports = event;

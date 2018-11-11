@@ -7,6 +7,4 @@ const team = db.define('team', {
     capacity: sequelize.INTEGER
 });
 
-team.belongsTo(event);
-
 module.exports = team;
