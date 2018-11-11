@@ -1,9 +1,6 @@
 module.exports = objectRepository => async (req, res, next) => {
     try {
-        const { friendId } = req.body;
-        if (!friendId) {
-            return next('friendId needed');
-        }
+        const { friendId } = req.params;
 
         const request = await objectRepository.models.friendRequest.findOne({
             where: { userId: req.user.id, friendId, isAccepted: 1 }

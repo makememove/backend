@@ -58,11 +58,11 @@ router.get(
     },
     json()
 );
-router.post('/friends/request', requestFriend(objectRepository), json());
+router.post('/friends/request/:friendId', requestFriend(objectRepository), json());
 router.get('/friends/requests', getFriendRequests(objectRepository), json());
 router.get('/friends/requests/sent', getFriendRequests(objectRepository, true), json());
-router.post('/friends/requests/accept', acceptFriendRequest(objectRepository), json());
-router.post('/friends/requests/deny', denyFriendRequest(objectRepository), json());
-router.post('/friends/delete', deleteFriend(objectRepository), json());
+router.post('/friends/requests/accept/:userId', acceptFriendRequest(objectRepository), json());
+router.post('/friends/requests/deny/:userId', denyFriendRequest(objectRepository), json());
+router.post('/friends/delete/:friendId', deleteFriend(objectRepository), json());
 
 module.exports = router;
