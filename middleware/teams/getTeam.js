@@ -10,7 +10,10 @@ module.exports = objectRepository => async (req, res, next) => {
             include: [
                 {
                     model: objectRepository.models.user,
-                    attributes: ['id', 'firstName', 'lastName']
+                    attributes: ['id', 'firstName', 'lastName'],
+                    through: {
+                        attributes: []
+                    }
                 }
             ]
         });
