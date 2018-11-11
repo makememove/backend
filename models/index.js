@@ -3,7 +3,6 @@ const user = require('./user');
 const event = require('./event');
 const team = require('./team');
 const membership = require('./membership');
-const attendance = require('./attendance');
 const category = require('./category');
 const sport = require('./sport');
 const userSkillPoint = require('./userSkillPoint');
@@ -18,7 +17,6 @@ module.exports = {
     event,
     team,
     membership,
-    attendance,
     category,
     sport,
     userSkillPoint,

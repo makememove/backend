@@ -31,12 +31,11 @@ const server = http.createServer(app);
     try {
         await models.sequelize.authenticate();
         await models.user.sync();
-        await models.sport.sync();
+        await models.sport.sync();1
         await models.category.sync();
         await models.event.sync();
         await models.team.sync();
         await models.membership.sync();
-        await models.attendance.sync();
         await models.userSkillPoint.sync();
         await models.teamSkillPoint.sync();
         await models.ranking.sync();

@@ -2,6 +2,11 @@ module.exports = objectRepository => async (req, res, next) => {
     try {
         const query = {
             include: [
+                {
+                    model: objectRepository.models.user,
+                    attributes: ['id', 'firstName', 'lastName', 'userName'],
+                    as: 'creator'
+                },
                 { model: objectRepository.models.category },
                 { model: objectRepository.models.sport }
             ]

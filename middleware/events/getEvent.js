@@ -13,11 +13,6 @@ module.exports = objectRepository => async (req, res, next) => {
                 { model: objectRepository.models.sport },
                 {
                     model: objectRepository.models.team,
-                    through: { model: objectRepository.models.attendance, attributes: [] },
-                    as: 'attendances'
-                },
-                {
-                    model: objectRepository.models.team,
                     through: { model: objectRepository.models.ranking, attributes: [] },
                     as: 'rankings'
                 }
