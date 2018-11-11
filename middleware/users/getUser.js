@@ -23,8 +23,7 @@ module.exports = objectRepository => async (req, res, next) => {
         }
 
         user = JSON.parse(JSON.stringify(user));
-
-
+        user.type = user.type || 2;
 
         res.locals.user = user;
     } catch (err) {

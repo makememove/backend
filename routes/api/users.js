@@ -32,7 +32,6 @@ router.get(
     getFriendRequests(objectRepository, false, true),
     getFriendRequests(objectRepository, true, true),
     (req, res, next) => {
-        res.locals.user = JSON.parse(JSON.stringify(res.locals.user));
         let friends = [];
         friends = friends.concat(res.locals.sent);
         friends = friends.concat(res.locals.requests);
@@ -49,7 +48,6 @@ router.get(
     getFriendRequests(objectRepository, false, true),
     getFriendRequests(objectRepository, true, true),
     (req, res, next) => {
-        res.locals.user = JSON.parse(JSON.stringify(res.locals.user));
         let friends = [];
         friends = friends.concat(res.locals.sent);
         friends = friends.concat(res.locals.requests);
