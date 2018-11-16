@@ -11,7 +11,8 @@ const {
     acceptFriendRequest,
     deleteFriend,
     denyFriendRequest,
-    updateUser
+    updateUser,
+    deleteFriendRequest
 } = require('../../middleware/users');
 
 const models = require('../../models');
@@ -65,6 +66,11 @@ router.get('/friends/requests/sent', getFriendRequests(objectRepository, true), 
 router.post('/friends/requests/accept/:userId', acceptFriendRequest(objectRepository), json());
 router.post('/friends/requests/deny/:userId', denyFriendRequest(objectRepository), json());
 router.post('/friends/delete/:friendId', deleteFriend(objectRepository), json());
+router.post(
+    '/friends/requests/sent/delete/:friendId',
+    deleteFriendRequest(objectRepository),
+    json()
+);
 router.post('/edit', getUser(objectRepository), updateUser(objectRepository), json());
 
 module.exports = router;
