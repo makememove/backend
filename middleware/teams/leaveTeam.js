@@ -22,6 +22,14 @@ module.exports = objectRepository => async (req, res, next) => {
             where: { teamId, userId: req.user.id }
         });
 
+        const membershipCount = await objectRepository.models.membership.count({
+            where: { teamId }
+        });
+
+        if (membershipCount === 0) {
+            await objectRepository.models.team.destroy({ where: { id: teamId } });
+        }
+
         res.locals.status = 'ok';
     } catch (err) {
         console.log(err);
