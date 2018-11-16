@@ -23,6 +23,22 @@ module.exports = objectRepository => async (req, res, next) => {
         }
 
         await objectRepository.models.membership.create({ teamId, userId: req.user.id });
+        const newMember = await objectRepository.models.user.findOne({
+            where: { id: req.user.id }
+        });
+        const event = objectRepository.models.event.findOne({ where: { id: team.eventId } });
+        await Promise.all(
+            team.users.map(user =>
+                objectRepository.models.notification.create({
+                    type: 0,
+                    eventId: team.eventId,
+                    userId: user.id,
+                    message: `${newMember.userName} joined ${team.name} for the event: ${
+                        event.name
+                    }`
+                })
+            )
+        );
 
         res.locals.status = 'ok';
     } catch (err) {
