@@ -21,6 +21,13 @@ module.exports = objectRepository => async (req, res, next) => {
             isAccepted: 0
         });
 
+        const user = await objectRepository.models.user.findOne({ where: { id: req.user.id } });
+        await objectRepository.models.notification.create({
+            type: 2,
+            message: `${user.userName} sent you a friend request!`,
+            userId: friendId
+        });
+
         res.locals.status = 'ok';
     } catch (err) {
         console.log(err);

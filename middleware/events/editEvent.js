@@ -51,6 +51,25 @@ module.exports = objectRepository => async (req, res, next) => {
             }
         );
 
+        const results = await Promise.all(
+            event.teams.map(team =>
+                objectRepository.models.membership.findAll({ where: { teamId: team.id } })
+            )
+        );
+        const notifications = [];
+        results.forEach(memberships =>
+            memberships.forEach(membership => {
+                notifications.push({
+                    type: 1,
+                    message: `${event.creator.userName} modified the event: ${event.title}`,
+                    eventId: event.id,
+                    userId: membership.userId
+                });
+            })
+        );
+
+        await objectRepository.models.notification.bulkCreate(notifications);
+
         delete res.locals.event;
 
         res.locals.status = 'ok';
