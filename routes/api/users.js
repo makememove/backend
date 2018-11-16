@@ -15,7 +15,7 @@ const {
     deleteFriendRequest
 } = require('../../middleware/users');
 
-const { getNotifications } = require('../../middleware/notifications');
+const { getNotifications, deleteNotification } = require('../../middleware/notifications');
 
 const models = require('../../models');
 
@@ -32,6 +32,7 @@ router.use(checkAccess(objectRepository));
 router.get('/', getUsers(objectRepository), json());
 
 router.get('/notifications', getNotifications(objectRepository), json());
+router.post('/notifications/delete/:notificationId', deleteNotification(objectRepository), json());
 
 router.get(
     '/me',
