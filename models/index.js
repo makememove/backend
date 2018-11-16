@@ -10,6 +10,7 @@ const teamSkillPoint = require('./teamSkillPoint');
 const ranking = require('./ranking');
 const userSport = require('./userSport');
 const friendRequest = require('./friendRequest');
+const notification = require('./notification');
 
 module.exports = {
     sequelize,
@@ -23,5 +24,6 @@ module.exports = {
     teamSkillPoint,
     ranking,
     userSport,
-    friendRequest
+    friendRequest,
+    notification
 };
