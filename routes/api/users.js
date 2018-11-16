@@ -15,6 +15,8 @@ const {
     deleteFriendRequest
 } = require('../../middleware/users');
 
+const { getNotifications } = require('../../middleware/notifications');
+
 const models = require('../../models');
 
 function json() {
@@ -28,6 +30,9 @@ const objectRepository = {
 router.use(checkAccess(objectRepository));
 
 router.get('/', getUsers(objectRepository), json());
+
+router.get('/notifications', getNotifications(objectRepository), json());
+
 router.get(
     '/me',
     getUser(objectRepository),
@@ -60,6 +65,7 @@ router.get(
     },
     json()
 );
+
 router.post('/friends/request/:friendId', requestFriend(objectRepository), json());
 router.get('/friends/requests', getFriendRequests(objectRepository), json());
 router.get('/friends/requests/sent', getFriendRequests(objectRepository, true), json());
