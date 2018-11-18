@@ -55,6 +55,28 @@ module.exports = objectRepository => async (req, res, next) => {
             ];
         }
 
+        if (req.query.location) {
+            query.where.location = {
+                [objectRepository.models.sequelize.Op.like]: req.query.location
+            };
+        }
+
+        if (req.query.title) {
+            query.where.title = { [objectRepository.models.sequelize.Op.like]: req.query.title };
+        }
+
+        if (typeof req.query.lowestSkillPoint !== 'undefined') {
+            query.where.lowestSkillPoint = {
+                [objectRepository.models.sequelize.Op.gt]: parseInt(req.query.lowestSkillPoint)
+            };
+        }
+
+        if (typeof req.query.highestSkillPoint !== 'undefined') {
+            query.where.highestSkillPoint = {
+                [objectRepository.models.sequelize.Op.lt]: parseInt(req.query.highestSkillPoint)
+            };
+        }
+
         if (typeof req.query.creatorId !== 'undefined') {
             query.where.creatorId = parseInt(req.query.creatorId);
         }
