@@ -11,6 +11,8 @@ const {
     deleteEvent
 } = require('../../middleware/events/');
 
+const { getFriendRequests, aggregateFriendRequests } = require('../../middleware/users');
+
 const models = require('../../models/');
 
 function json() {
@@ -23,8 +25,30 @@ const objectRepository = {
 
 router.use(checkAccess(objectRepository));
 
-router.get('/', getEvents(objectRepository), json());
-router.get('/:eventId', getEvent(objectRepository), json());
+router.get(
+    '/',
+    (req, res, next) => {
+        res.locals.user = {};
+        return next();
+    },
+    getFriendRequests(objectRepository, false, true),
+    getFriendRequests(objectRepository, true, true),
+    aggregateFriendRequests(),
+    getEvents(objectRepository),
+    json()
+);
+router.get(
+    '/:eventId',
+    (req, res, next) => {
+        res.locals.user = {};
+        return next();
+    },
+    getFriendRequests(objectRepository, false, true),
+    getFriendRequests(objectRepository, true, true),
+    aggregateFriendRequests(),
+    getEvent(objectRepository),
+    json()
+);
 router.post('/create', createEvent(objectRepository), json());
 router.post('/edit/:eventId', getEvent(objectRepository), editEvent(objectRepository), json());
 router.post('/delete/:eventId', getEvent(objectRepository), deleteEvent(objectRepository), json());

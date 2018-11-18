@@ -23,7 +23,19 @@ module.exports = objectRepository => async (req, res, next) => {
         };
 
         query.where = {
-            id: req.params.eventId
+            id: req.params.eventId,
+            [objectRepository.models.sequelize.Op.or]: [
+                { public: 1 },
+                { public: null },
+                {
+                    public: 0,
+                    creatorId: {
+                        [objectRepository.models.sequelize.Op.in]: res.locals.user.friends.map(
+                            friend => friend.id
+                        )
+                    }
+                }
+            ]
         };
 
         if (req.query.sportId) {
@@ -36,6 +48,7 @@ module.exports = objectRepository => async (req, res, next) => {
         }
 
         res.locals.event = event;
+        delete res.locals.user;
     } catch (err) {
         console.log(err);
         return next(err);

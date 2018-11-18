@@ -12,7 +12,8 @@ const {
     deleteFriend,
     denyFriendRequest,
     updateUser,
-    deleteFriendRequest
+    deleteFriendRequest,
+    aggregateFriendRequests
 } = require('../../middleware/users');
 
 const { getNotifications, deleteNotification } = require('../../middleware/notifications');
@@ -39,15 +40,7 @@ router.get(
     getUser(objectRepository),
     getFriendRequests(objectRepository, false, true),
     getFriendRequests(objectRepository, true, true),
-    (req, res, next) => {
-        let friends = [];
-        friends = friends.concat(res.locals.sent);
-        friends = friends.concat(res.locals.requests);
-        res.locals.user.friends = friends;
-        delete res.locals.sent;
-        delete res.locals.requests;
-        next();
-    },
+    aggregateFriendRequests(),
     json()
 );
 router.get(
@@ -55,15 +48,7 @@ router.get(
     getUser(objectRepository),
     getFriendRequests(objectRepository, false, true),
     getFriendRequests(objectRepository, true, true),
-    (req, res, next) => {
-        let friends = [];
-        friends = friends.concat(res.locals.sent);
-        friends = friends.concat(res.locals.requests);
-        res.locals.user.friends = friends;
-        delete res.locals.sent;
-        delete res.locals.requests;
-        next();
-    },
+    aggregateFriendRequests(),
     json()
 );
 

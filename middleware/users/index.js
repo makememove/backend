@@ -7,6 +7,7 @@ const deleteFriend = require('./deleteFriend');
 const denyFriendRequest = require('./denyFriendRequest');
 const updateUser = require('./updateUser');
 const deleteFriendRequest = require('./deleteFriendRequest');
+const aggregateFriendRequests = require('./aggregateFriendRequests');
 
 module.exports = {
     getUsers,
@@ -17,5 +18,6 @@ module.exports = {
     deleteFriend,
     denyFriendRequest,
     updateUser,
-    deleteFriendRequest
+    deleteFriendRequest,
+    aggregateFriendRequests
 };
