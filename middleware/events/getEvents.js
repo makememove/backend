@@ -18,6 +18,15 @@ module.exports = objectRepository => async (req, res, next) => {
             query.where.sportId = req.query.sportId;
         }
 
+        if (typeof req.query.closed !== 'undefined') {
+            const closed = parseInt(req.query.closed);
+            if (closed === 1) {
+                query.where.closed = 1;
+            } else if (closed === 0) {
+                query.where.closed = 0;
+            }
+        }
+
         if (typeof req.query.public !== 'undefined') {
             const isPublic = parseInt(req.query.public);
             if (isPublic === 1) {
@@ -44,6 +53,10 @@ module.exports = objectRepository => async (req, res, next) => {
                     }
                 }
             ];
+        }
+
+        if (typeof req.query.creatorId !== 'undefined') {
+            query.where.creatorId = parseInt(req.query.creatorId);
         }
 
         res.locals.events = await objectRepository.models.event.findAll(query);
