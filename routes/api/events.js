@@ -9,7 +9,8 @@ const {
     editEvent,
     getEvent,
     deleteEvent,
-    closeEvent
+    closeEvent,
+    getMyEvents
 } = require('../../middleware/events/');
 
 const { getFriendRequests, aggregateFriendRequests } = require('../../middleware/users');
@@ -38,6 +39,8 @@ router.get(
     getEvents(objectRepository),
     json()
 );
+router.get('/mine', getMyEvents(objectRepository), json());
+
 router.get(
     '/:eventId',
     (req, res, next) => {

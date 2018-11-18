@@ -4,6 +4,7 @@ const editEvent = require('./editEvent');
 const getEvent = require('./getEvent');
 const deleteEvent = require('./deleteEvent');
 const closeEvent = require('./closeEvent');
+const getMyEvents = require('./getMyEvents');
 
 module.exports = {
     getEvents,
@@ -11,5 +12,6 @@ module.exports = {
     editEvent,
     getEvent,
     deleteEvent,
-    closeEvent
+    closeEvent,
+    getMyEvents
 };
