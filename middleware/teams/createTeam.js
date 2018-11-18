@@ -25,13 +25,14 @@ module.exports = objectRepository => async (req, res, next) => {
             return next(new Error('capacity must be less than the memberLimit of the event'));
         }
 
-        await objectRepository.models.team.create({
+        const created = await objectRepository.models.team.create({
             name,
             capacity,
             eventId
         });
 
         res.locals.status = 'ok';
+        res.locals.id = created.id;
     } catch (err) {
         console.log(err);
         return next(err);
