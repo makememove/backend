@@ -21,6 +21,10 @@ module.exports = objectRepository => async (req, res, next) => {
             return next(new Error('event is full'));
         }
 
+        if (event.memberLimit !== null && capacity > event.memberLimit) {
+            return next(new Error('capacity must be less than the memberLimit of the event'));
+        }
+
         await objectRepository.models.team.create({
             name,
             capacity,

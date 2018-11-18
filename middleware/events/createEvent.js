@@ -11,7 +11,8 @@ module.exports = objectRepository => async (req, res, next) => {
             highestSkillPoint,
             categoryId,
             sportId,
-            maxAttending
+            maxAttending,
+            memberLimit
         } = req.body;
 
         if (!title) {
@@ -54,7 +55,8 @@ module.exports = objectRepository => async (req, res, next) => {
             creatorId: req.user.id,
             categoryId,
             sportId,
-            maxAttending
+            maxAttending,
+            memberLimit
         });
 
         res.locals.status = 'ok';

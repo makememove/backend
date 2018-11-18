@@ -14,7 +14,8 @@ const event = db.define('event', {
     length: sequelize.INTEGER,
     lowestSkillPoint: sequelize.INTEGER,
     highestSkillPoint: sequelize.INTEGER,
-    maxAttending: { type: sequelize.INTEGER, default: 2 }
+    maxAttending: { type: sequelize.INTEGER, default: 2 },
+    memberLimit: sequelize.INTEGER
 });
 
 event.belongsTo(user, { foreignKey: 'creatorId', as: 'creator' });
