@@ -25,15 +25,16 @@ module.exports = objectRepository => async (req, res, next) => {
             } else if (isPublic === 0) {
                 query.where.public = 0;
                 query.where.creatorId = {
-                    [objectRepository.models.sequelize.Op.in]: res.locals.user.friends.map(
-                        friend => friend.id
-                    )
+                    [objectRepository.models.sequelize.Op.in]: res.locals.user.friends
+                        .map(friend => friend.id)
+                        .concat([req.user.id])
                 };
             }
         } else {
             query.where[objectRepository.models.sequelize.Op.or] = [
                 { public: 1 },
                 { public: null },
+                { creatorId: req.user.id },
                 {
                     public: 0,
                     creatorId: {

@@ -8,7 +8,8 @@ const {
     createEvent,
     editEvent,
     getEvent,
-    deleteEvent
+    deleteEvent,
+    closeEvent
 } = require('../../middleware/events/');
 
 const { getFriendRequests, aggregateFriendRequests } = require('../../middleware/users');
@@ -76,5 +77,6 @@ router.post(
     deleteEvent(objectRepository),
     json()
 );
+router.post('/close/:eventId', closeEvent(objectRepository), json());
 
 module.exports = router;

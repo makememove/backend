@@ -27,6 +27,7 @@ module.exports = objectRepository => async (req, res, next) => {
             [objectRepository.models.sequelize.Op.or]: [
                 { public: 1 },
                 { public: null },
+                { creatorId: req.user.id },
                 {
                     public: 0,
                     creatorId: {
