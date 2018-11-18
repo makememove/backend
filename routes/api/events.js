@@ -50,7 +50,31 @@ router.get(
     json()
 );
 router.post('/create', createEvent(objectRepository), json());
-router.post('/edit/:eventId', getEvent(objectRepository), editEvent(objectRepository), json());
-router.post('/delete/:eventId', getEvent(objectRepository), deleteEvent(objectRepository), json());
+router.post(
+    '/edit/:eventId',
+    (req, res, next) => {
+        res.locals.user = {};
+        return next();
+    },
+    getFriendRequests(objectRepository, false, true),
+    getFriendRequests(objectRepository, true, true),
+    aggregateFriendRequests(),
+    getEvent(objectRepository),
+    editEvent(objectRepository),
+    json()
+);
+router.post(
+    '/delete/:eventId',
+    (req, res, next) => {
+        res.locals.user = {};
+        return next();
+    },
+    getFriendRequests(objectRepository, false, true),
+    getFriendRequests(objectRepository, true, true),
+    aggregateFriendRequests(),
+    getEvent(objectRepository),
+    deleteEvent(objectRepository),
+    json()
+);
 
 module.exports = router;

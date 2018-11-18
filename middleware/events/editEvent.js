@@ -33,6 +33,10 @@ module.exports = objectRepository => async (req, res, next) => {
 
         const { event } = res.locals;
 
+        if (event.creatorId !== req.user.id) {
+            return next(new Error('only creator can edit'));
+        }
+
         await objectRepository.models.event.update(
             {
                 date: date || event.date,
