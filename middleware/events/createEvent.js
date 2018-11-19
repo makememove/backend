@@ -37,7 +37,7 @@ module.exports = objectRepository => async (req, res, next) => {
         if (typeof closed === 'undefined') {
             return next(new Error('closed must by specified!'));
         }
-        if (closed !== 1 || closed !== 0) {
+        if (closed !== 1 && closed !== 0) {
             return next(new Error('closed moust be either 0 or 1'));
         }
 
