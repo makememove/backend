@@ -55,13 +55,13 @@ module.exports = objectRepository => async (req, res, next) => {
             ];
         }
 
-        if (req.query.location) {
+        if (req.query.location && req.query.location !== 'null') {
             query.where.location = {
                 [objectRepository.models.sequelize.Op.like]: req.query.location
             };
         }
 
-        if (req.query.title) {
+        if (req.query.title && req.query.title !== 'null') {
             query.where.title = { [objectRepository.models.sequelize.Op.like]: req.query.title };
         }
 
