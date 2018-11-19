@@ -1,7 +1,7 @@
 module.exports = objectRepository => async (req, res, next) => {
     try {
         const { name, capacity, eventId } = req.body;
-        if (!name || !capacity || !eventId) {
+        if (!name || !eventId) {
             return next('name and capacity and eventId needed');
         }
 
@@ -21,7 +21,11 @@ module.exports = objectRepository => async (req, res, next) => {
             return next(new Error('event is full'));
         }
 
-        if (event.memberLimit !== null && capacity > event.memberLimit) {
+        if (
+            event.memberLimit !== null &&
+            typeof capacity !== 'undefined' &&
+            capacity > event.memberLimit
+        ) {
             return next(new Error('capacity must be less than the memberLimit of the event'));
         }
 
