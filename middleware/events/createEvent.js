@@ -12,7 +12,8 @@ module.exports = objectRepository => async (req, res, next) => {
             categoryId,
             sportId,
             maxAttending,
-            memberLimit
+            memberLimit,
+            closed
         } = req.body;
 
         if (!title) {
@@ -32,6 +33,14 @@ module.exports = objectRepository => async (req, res, next) => {
         if (!sportId) {
             return next(new Error('sport id must by specified!'));
         }
+
+        if (typeof closed === 'undefined') {
+            return next(new Error('closed must by specified!'));
+        }
+        if (closed !== 1 || closed !== 0) {
+            return next(new Error('closed moust be either 0 or 1'));
+        }
+
         const sport = await objectRepository.models.sport.findOne({
             where: { id: sportId }
         });
@@ -56,7 +65,8 @@ module.exports = objectRepository => async (req, res, next) => {
             categoryId,
             sportId,
             maxAttending,
-            memberLimit
+            memberLimit,
+            closed
         });
 
         res.locals.status = 'ok';
