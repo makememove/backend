@@ -27,7 +27,7 @@ module.exports = objectRepository => async (req, res, next) => {
             }
         }
 
-        if (typeof req.query.public !== 'undefined') {
+        if (typeof req.query.public !== 'undefined' && req.query.public !== 'null') {
             const isPublic = parseInt(req.query.public);
             if (isPublic === 1) {
                 query.where.public = 1;
@@ -65,13 +65,19 @@ module.exports = objectRepository => async (req, res, next) => {
             query.where.title = { [objectRepository.models.sequelize.Op.like]: req.query.title };
         }
 
-        if (typeof req.query.lowestSkillPoint !== 'undefined') {
+        if (
+            typeof req.query.lowestSkillPoint !== 'undefined' &&
+            req.query.lowestSkillPoint !== 'null'
+        ) {
             query.where.lowestSkillPoint = {
                 [objectRepository.models.sequelize.Op.gt]: parseInt(req.query.lowestSkillPoint)
             };
         }
 
-        if (typeof req.query.highestSkillPoint !== 'undefined') {
+        if (
+            typeof req.query.highestSkillPoint !== 'undefined' &&
+            req.query.highestSkillPoint !== 'null'
+        ) {
             query.where.highestSkillPoint = {
                 [objectRepository.models.sequelize.Op.lt]: parseInt(req.query.highestSkillPoint)
             };
