@@ -10,7 +10,7 @@ module.exports = objectRepository => async (req, res, next) => {
                 { model: objectRepository.models.category },
                 { model: objectRepository.models.sport }
             ],
-            order: ['location', 'desc']
+            order: ['date', 'desc']
         };
         const eventIds = await objectRepository.models.sequelize
             .query(
