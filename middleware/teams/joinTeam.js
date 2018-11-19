@@ -33,9 +33,9 @@ module.exports = objectRepository => async (req, res, next) => {
                     type: 0,
                     eventId: team.eventId,
                     userId: user.id,
-                    message: `${newMember.userName} joined ${team.name} for the event: ${
-                        event.title || ''
-                    }`
+                    message: `${newMember.userName} joined ${
+                        team.name
+                    } for the event: ${event.title || ''}`
                 })
             )
         );
