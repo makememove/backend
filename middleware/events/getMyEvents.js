@@ -10,13 +10,13 @@ module.exports = objectRepository => async (req, res, next) => {
                 { model: objectRepository.models.category },
                 { model: objectRepository.models.sport }
             ],
-            order: ['date', 'desc']
+            order: [['date', 'desc']]
         };
         const eventIds = await objectRepository.models.sequelize
             .query(
                 `select t.eventId from memberships m
-            join teams t on t.id = m.teamId
-            where m.userId = ${parseInt(req.user.id)}`,
+                join teams t on t.id = m.teamId
+                where m.userId = ${parseInt(req.user.id)}`,
                 { raw: true, type: objectRepository.models.sequelize.QueryTypes.SELECT }
             )
             .map(result => result.eventId);
