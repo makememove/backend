@@ -4,10 +4,12 @@
     "private": true,
     "scripts": {
         "start": "node ./bin/www",
+        "test": "mocha test/*.js",
         "dev": "nodemon ./bin/www --ignore node_modules"
     },
     "dependencies": {
         "body-parser": "^1.18.3",
+        "chai": "^4.2.0",
         "cookie-parser": "~1.4.3",
         "debug": "~2.6.9",
         "email-validator": "^2.0.4",
@@ -15,6 +17,7 @@
         "http-errors": "~1.6.2",
         "jade": "~1.11.0",
         "jsonwebtoken": "^8.3.0",
+        "mocha": "^5.2.0",
         "morgan": "~1.9.0",
         "mysql2": "^1.6.1",
         "sequelize": "^4.39.0"

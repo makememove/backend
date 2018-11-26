@@ -91,7 +91,6 @@ module.exports = objectRepository => async (req, res, next) => {
             const date = new Date(req.query.date);
             const nextDay = new Date();
             nextDay.setTime(date.getTime() + 86400000);
-            console.log(date, nextDay);
             query.where.date = { [objectRepository.models.sequelize.Op.between]: [date, nextDay] };
         }
 

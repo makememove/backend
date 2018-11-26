@@ -21,7 +21,7 @@ module.exports = objectRepository => async (req, res, next) => {
         }));
 
         await objectRepository.models.ranking.bulkCreate(ranks);
-        await objectRepository.models.event.update({ closed: 1 }, { where: { id: eventId } });
+        await objectRepository.models.event.update({ closed: 1 }, { where: { id: eventId } });yarn
         res.locals.status = 'ok';
     } catch (err) {
         console.log(err);
