@@ -14,8 +14,8 @@ module.exports = objectRepository => async (req, res, next) => {
                 {
                     model: objectRepository.models.team,
                     through: { model: objectRepository.models.ranking, attributes: ['place'] },
-                    as: 'rankings',
-                    order: [['place', 'asc']]
+                    as: 'rankings'
+                    // order: [['place', 'asc']]
                 },
                 {
                     model: objectRepository.models.team
@@ -39,6 +39,16 @@ module.exports = objectRepository => async (req, res, next) => {
                 }
             ]
         };
+
+        query.order = [
+            {
+                model: objectRepository.models.team,
+                through: { model: objectRepository.models.ranking, attributes: ['place'] },
+                as: 'rankings'
+            },
+            'place',
+            'asc'
+        ];
 
         if (req.query.sportId) {
             query.where.sportId = req.query.sportId;
