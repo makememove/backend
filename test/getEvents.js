@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { getEvents } = require('../middleware/events/index');
 
-const mock = query => ({
+const mock = query1 => ({
     models: {
         sequelize: {
             Op: {
@@ -19,7 +19,7 @@ const mock = query => ({
         event: {
             findAll(query) {
                 expect(query).to.have.property('where');
-                for (const key in query) {
+                for (const key in query1) {
                     expect(query).to.have.property(key);
                 }
                 return [{}];
