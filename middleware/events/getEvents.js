@@ -87,6 +87,14 @@ module.exports = objectRepository => async (req, res, next) => {
             query.where.creatorId = parseInt(req.query.creatorId);
         }
 
+        if (typeof req.query.date !== 'undefined') {
+            const date = new Date(req.query.date);
+            const nextDay = new Date();
+            nextDay.setTime(date.getTime() + 86400000);
+            console.log(date, nextDay);
+            query.where.date = { [objectRepository.models.sequelize.Op.between]: [date, nextDay] };
+        }
+
         res.locals.events = await objectRepository.models.event.findAll(query);
         delete res.locals.user;
     } catch (err) {
